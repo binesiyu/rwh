@@ -15,6 +15,6 @@ renderJValue (JObject o) = "{" ++ pairs o ++ "}"
           pairs ps = intercalate "," (map renderPair ps)
           renderPair (k,v) = show k ++ ":" ++ renderJValue v
 
-renderJValue (JArry a) = "[" ++ values a ++ "]"
+renderJValue (JArray a) = "[" ++ values a ++ "]"
     where values [] = ""
           values vs = intercalate "," (map renderJValue vs)

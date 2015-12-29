@@ -1,9 +1,10 @@
 module Main(main) where
 
-import           PutJSON
+import qualified PrettifyJSON as PJ
+import qualified PutJSON      as P
 import           SimpleJSON
 
 putJValue :: JValue -> IO ()
-putJValue = putStrLn . renderJValue
+putJValue = putStrLn . P.renderJValue
 
 main = print (JObject [("foo",JNumber 1),("bar",JBool False)])

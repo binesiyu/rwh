@@ -15,7 +15,7 @@ data JValue = JString String
             | JBool Bool
             | JNull
             | JObject [(String,JValue)]
-            | JArry [JValue]
+            | JArray [JValue]
               deriving(Eq,Ord,Show)
 
 getString (JString s) = Just s
@@ -33,7 +33,7 @@ getBool _ = Nothing
 getObject (JObject o) = Just o
 getObject _ = Nothing
 
-getArray (JArry a) = Just a
+getArray (JArray a) = Just a
 getArray _ = Nothing
 
 isNull v = v == JNull
