@@ -59,10 +59,18 @@ mapEithers f (x:xs) = case mapEithers f xs of
                                       Right y -> Right (y:ys)
 mapEithers _ _ = Right []
 
+mapEithers' :: (a -> Either b c) -> [a] -> Either b [c]
+mapEithers' f = foldr fun (Right [])
+    where fun next init = case init of
+                      Left err -> Left err
+                      Right ys -> case f next of
+                                    Left err -> Left err
+                                    Right y -> Right (y:ys)
+
 {-- snippet array --}
 instance (JSON a) => JSON [a] where
     toJValue = JArray . map toJValue
-    fromJValue (JArray a) = mapEithers fromJValue a
+    fromJValue (JArray a) = mapEithers' fromJValue a
     fromJValue _ = Left "is not Array"
 {-- /snippet array --}
 
